@@ -1,0 +1,65 @@
+{% include 'mygallery/base.html' %}
+
+<div class="conatiner-fluid"
+    style="background-image: url('/static/images/e6d6e5e7c8477b40d62506416713b7d2.jpg'); background-repeat: no-repeat; background-size: cover;background-attachment: fixed;">
+    <section id="landingpage">
+        <div class="container-fluid" style=" height: 60vh;">
+            <h2 class="text-center animate__animated animate__bounce" style="padding-top: 15%;font-family: 'Fugaz One', cursive;
+    font-family: 'Luckiest Guy', cursive;font-size: 30px;color: white;
+    ">We welcome you to our shop with alot of confidence </h2>
+            <p class="text-center  animate__animated animate__bounce " style="font-family: 'Fugaz One', cursive;
+    font-family: 'Luckiest Guy', cursive;font-size: 30px;color: white;">View and choose any outfit of your choice</p>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <h2 class="text-center" style="padding-top: 70px;font-family: 'Fugaz One', cursive;
+    font-family: 'Luckiest Guy', cursive;font-size: 40px;color: white;
+    ">Here are the services we offer</h2>
+        {% block content %}
+        <div class="row container-fluid content">
+            {% for image in images %}
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 thumbnails">
+                <div class="card-body">
+                    <img src="{{image.image.url}}" class="img-fluid img-responsive" alt="image"
+                        style="width: 710%; height: 450px;">
+                    <br>
+                    <a href="#" class="btn btn-primary btn-sm mt-3" data-toggle="modal" data-target="#{{image.id}}">View
+                        More</a>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="{{image.id}}" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <h3 class="modal-title text-center" id="title">{{image.title}}</h3>
+                            <a href="#"><img src="{{image.image.url}}" class="img-responsive" alt="image"
+                                    style="width: 100%; height: 250px;"></a>
+
+                            <p class="text-center">{{image.caption}}</p>
+                            <p>Location: {{image.location}}</p>
+                            <p>Description : {{image.description}}</p>
+                            <p>Posted on :{{image.pub_date}}</p>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="text" value="{{image.image.url}}" id="copy" style="width:250px"
+                                class="form-control">
+
+                            <button class="btn btn-success btn-sm" onclick="copyLink('{{image.id}}.url')">Copy</button>
+                            <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            {% endfor %}
+        </div>
+
+        {% endblock %}
+    </section>
+</div>
