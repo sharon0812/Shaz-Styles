@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+from decouple import config,Csv
+import cloudinary
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -77,12 +81,12 @@ WSGI_APPLICATION = 'fashion.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'fashion',
-        'PASSWORD':'Access',
-        'USER':'moringa',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+         'NAME': 'fashion',
+        'USER': 'moringa',
+        'PASSWORD': 'Access',
         'HOST': '127.0.0.1',
-        'PORT':5432,
+        'PORT': '5432',
     }
 }
 
@@ -130,3 +134,10 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+cloudinary.config(
+  cloud_name = "di4pd4yxp",
+  api_key = "865599825291137",
+  api_secret = "3-k9A1NISwjplnmUpyDdaNcEHfU"
+)
