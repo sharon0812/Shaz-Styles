@@ -1,5 +1,6 @@
 {% include 'myfashion/base.html' %}
-
+{% load ratings %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="conatiner-fluid"
     style="background-image: url('/static/e6d6e5e7c8477b40d62506416713b7d2.jpg'); background-repeat: no-repeat; background-size: cover;background-attachment: fixed;">
     <section id="landingpage">
@@ -42,8 +43,48 @@
                             <p class="text-center">{{image.caption}}</p>
                             <p>Location: {{image.location}}</p>
                             <p>Description : {{image.description}}</p>
+                            <p>Price : {{image.price}}</p>
                             <p>Posted on :{{image.pub_date}}</p>
+
+                            <p>{{ avis.note }}</p>
+                            
+                            
+                            <form method="post" action="">
+                                {% csrf_token %}
+                                {% for field in form %}
+                                <div class="fieldWrapper form-group">
+                                   {{ field.label_tag }}
+                                   {{ field }}
+                                </div>
+                                {% endfor %}
+                            
+                             </form>
+                             <div class="rating rating">
+                               <a href="#5" style="color: tomato;" title="Give 5 stars" data-value="5"><b>★</b></a>
+                               <a href="#4" title="Give 4 stars" data-value="4">★</a>
+                               <a href="#3" title="Give 3 stars" data-value="3">★</a>
+                               <a href="#2" title="Give 2 stars" data-value="2">★</a>
+                               <a href="#1" title="Give 1 star" data-value="1">★</a>
+                             </div>
+                             
+                             <script>
+                               $(".rating a").on('click', function(e){
+                                 let value = $(this).data('value');
+                                  $.ajax({
+                                    
+                                     type: 'POST',
+                                     data: {'rating': value},
+                                     success: function (d){
+                                      // some processing
+                                     }
+                                  })
+                               });
+                             </script>
+
+                             
+                            
                         </div>
+
                         <div class="modal-footer">
                             <input type="text" value="{{image.image.url}}" id="copy" style="width:250px"
                                 class="form-control">
@@ -59,7 +100,74 @@
 
             {% endfor %}
         </div>
-
+        
         {% endblock %}
     </section>
+
+<div id="contact">
+   
+    <h1 style="text-align: center;"><b style="color: blue;">CONTACT US</b></h1>
+
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Contact us</h3>
+                <p> Email:anyangosharon26@gmail.com</p>
+                <p> Phone number : 0702165045</p>
+            </div>
+            <div class="col-md-4">
+                <h3>Locate us</h3>
+                <P>Nairobi, Kenya</P>
+                <p> Copyright @ C 2021 Locate a house</p>
+                <p><b style="color: blue;">Design by SharonAnyango @ © 2021</b></p>
+    
+            </div>
+            <div class="col-md-4">
+
+                <h3>Connect with us</h3>
+<style>
+    #about{
+    font-size: 20px;
+}
+#contact .jumbotron{
+    background-color:black;
+    color: white;
+}
+#contact{
+    text-align: center;
+}
+#icon{
+    display: flex;
+    justify-content: center;
+}
+#icon img{
+    margin-right: 20px;
+}
+</style>
+
+                <div id="icon">
+                    <div class="icon">
+                        <a href=""><img src="/static/about img/facebook.png" alt=""></a>
+                    </div>
+                    <br>
+                    <div class="icon">
+                        <a href=""><img src="/static/about img/g_plus.png" alt=""></a>
+                    </div>
+                    <br>
+                    <div class="icon">
+                        <a href=""><img src="/static/about img/twitter.png" alt=""></a>
+                    </div>
+                    <div class="icon">
+                        <a href=""><img src="/static/about img/you_tube.png" alt=""></a>
+                        
+                    </div>
+                </div>
+            </div>
+            
+
+        </div>
+    </div>
+    
+</div>
+
 </div>

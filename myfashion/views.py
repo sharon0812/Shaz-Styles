@@ -26,4 +26,36 @@ def search_results(request):
     def search_by_title(cls,search_term):
         news = cls.objects.filter(title__icontains=search_term)
         return news
-    
+        
+# star rating
+def avis(request, id): # view for displaying and storing the form
+    commande = get_object_or_404(Commande, id=id)
+
+    if request.method == "POST":
+        form = AvisForm(request.POST)
+        if form.is_valid():
+            avis = form.save(commit = False)
+            avis.commande = commande
+            avis.save()
+            commande.has_avis = True
+            commande.save()
+            if commande.plat.chef.nb_avis==0:
+                commande.plat.chef.rating = avis.note
+            else:
+                commande.plat.chef.rating = (commande.plat.chef.rating*commande.plat.chef.nb_avis + avis.note)/(commande.plat.chef.nb_avis + 1)
+            commande.plat.chef.nb_avis += 1
+            commande.plat.chef.save()
+            messages.success(request, 'Votre avis a été correctement envoyé !')
+            return redirect(mes_commandes)
+    else:
+        form = AvisForm()
+
+    return render(request, 'actualites/avis.html', locals())
+
+def avis2(request, id): # view for recording the rating
+    avis = get_object_or_404(Avis, id=id)
+    rating = request.POST.get('rating')
+    avis.note = rating
+    avis.save()
+    messages.success(request, 'Votre avis a été correctement envoyé !')
+    return redirect(mes_commandes)

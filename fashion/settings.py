@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myfashion',
     'bootstrap3',
+    'star_ratings',
 ]
 
 MIDDLEWARE = [
@@ -141,3 +142,7 @@ cloudinary.config(
   api_key = "865599825291137",
   api_secret = "3-k9A1NISwjplnmUpyDdaNcEHfU"
 )
+
+STAR_RATINGS_RERATE = False
+STAR_RATINGS_RANGE = 5
+STAR_RATINGS_ANONYMOUS = False

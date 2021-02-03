@@ -8,6 +8,7 @@ class Image(models.Model):
     caption = models.CharField(max_length=100)
     title = models.CharField(max_length=200, default='')
     description = models.TextField(default='')
+    price = models.CharField(max_length=200, default='')
     location = models.TextField(max_length=30,null=False,blank=False, default='')
     image=models.ImageField(upload_to='images/')
     pub_date = models.DateTimeField(auto_now=True)
@@ -62,3 +63,6 @@ class Location(models.Model):
         
     def __str__(self):
         return self.name
+
+class Avis(models.Model):
+    note = models.IntegerField()
