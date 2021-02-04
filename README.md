@@ -2,15 +2,17 @@
    Anyango Sharon
 
 ## DESCRIPTION
-   This is a fashion and design botique that that deals with woman outfits, you can view and search any outfit of your choice.
+   This is an app that showcase fashion and design for women outfit. A user can view the images rate and also order the outfit she may like.
 
 ## GITHUB REPO LINK
    https://github.com/sharon0812/Shaz-Styles
 
 ## FEATURES
-* You can view the images on the display
+* You can view the images on the display.
+* You can also rate he image.
 * search or look for the outfit by the category.
-* modal to display images details
+* Order any outfit of your choice.
+* modal to display images details.
 * order
 
 ## SETUP INSTALLATION
@@ -21,8 +23,9 @@
 
 ## TECHNOLOGY USED
 *  Python3.9
-*  Djando3
+*  Django3
 *  Bootstrap3
+*  Postgress
 
 ## LICENSE
    The project is underMIT license Copyright © 2021.All rigths reserved
