@@ -1,6 +1,8 @@
 {% include 'myfashion/base.html' %}
+{% load static%}
 {% load ratings %}
-
+{% block content %}
+<link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="conatiner-fluid"
     style="background-image: url('/static/roses-red-flowers-silk-wallpaper-preview.jpg'); background-repeat: no-repeat; background-size: cover;background-attachment: fixed;">
@@ -14,33 +16,12 @@
         </div>
     </section>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <div id="about">
-                    <h1 style="color: blue;"> ABOUT US </h1>
-                    <p style="color: green;">We believe in creating design that enhance the beauty of a woman.<br>
-                        bringing alive their personality as well as the physical form they reflect to the world. <br>
-                        We welcome you here with alot of confidence.
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="pick">
-                    <img src="" alt="" id="">
-
-                </div>
-            </div>
-
-        </div>
-    </div>
     
 
     <section id="fashion">
         <h2 class="text-center" style="padding-top: 70px;font-family: 'Fugaz One', cursive;
     font-family: 'Luckiest Guy', cursive;font-size: 40px;color:green;
     ">View our best sellers range</h2>
-        {% block content %}
         <div class="row container-fluid content">
             {% for image in images %}
             <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 thumbnails">
@@ -68,44 +49,11 @@
                             <p>Description : {{image.description}}</p>
                             <p>Price : {{image.price}}</p>
                             <p>Posted on :{{image.pub_date}}</p>
-
-                            <p>{{ avis.note }}</p>
-                            
-                            
-                            <form method="post" action="">
-                                {% csrf_token %}
-                                {% for field in form %}
-                                <div class="fieldWrapper form-group">
-                                   {{ field.label_tag }}
-                                   {{ field }}
-                                </div>
-                                {% endfor %}
-                            
-                             </form>
-                             <div class="rating rating">
-                               <a href="#5" style="color: tomato;" title="Give 5 stars" data-value="5"><b>★</b></a>
-                               <a href="#4" title="Give 4 stars" data-value="4">★</a>
-                               <a href="#3" title="Give 3 stars" data-value="3">★</a>
-                               <a href="#2" title="Give 2 stars" data-value="2">★</a>
-                               <a href="#1" title="Give 1 star" data-value="1">★</a>
-                             </div>
-                             
-                             <script>
-                               $(".rating a").on('click', function(e){
-                                 let value = $(this).data('value');
-                                  $.ajax({
-                                    
-                                     type: 'POST',
-                                     data: {'rating': value},
-                                     success: function (d){
-                                      // some processing
-                                     }
-                                  })
-                               });
-                             </script>
-
-                             
-                            
+                                   
+                                   
+                        </div>
+                        <div class="modal-title rate" style="display: flex;">
+                            {% ratings image %}
                         </div>
 
                         <div class="modal-footer">
@@ -126,6 +74,7 @@
         
         {% endblock %}
     </section>
+    
 
 <div id="contact">
    <!-- <a href="contacts"></a> -->
@@ -166,6 +115,12 @@
 #icon img{
     margin-right: 20px;
 }
+
+.rate{
+    display: flex;
+    list-style-type: none;
+    list-style: none;
+}
 </style>
 
                 <div id="icon">
@@ -194,3 +149,4 @@
 </div>
 
 </div>
+<script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
